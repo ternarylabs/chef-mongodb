@@ -17,3 +17,32 @@
 # limitations under the License.
 #
 
+case node['platform']
+when "debian", "ubuntu"
+  apt_repository "10gen" do
+    uri "http://downloads-distro.mongodb.org/repo/ubuntu-upstart"
+    distribution "dist"
+    components ["10gen"]
+    action :add
+    notifies :run, "execute[apt-get update]", :immediately
+  end
+
+when "centos","redhat"
+  arch = node['kernel']['machine'] =~ /x86_64/ ? "x86_64" : "i386"
+  yum_repository "10gen" do
+    url "http://downloads-distro.mongodb.org/repo/redhat/os/#{arch}/"
+    failovermethod "priority"
+    action :add
+    notifies :run, "execute[yum update]", :immediately
+  end
+
+else
+  Chef::Log.warn("The #{node['platform']} is not yet not supported by this cookbook")
+end
+
+packages = %w{mongodb-10gen}
+packages.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
