@@ -19,12 +19,18 @@
 #
 
 # SERVER CONFIG
-default['mongodb']['server_path'] = "/usr/share/mongodb"
-default['mongodb']['server_etc'] = "/etc/mongodb"
-default['mongodb']['server_pid'] = "/var/run/mongodb"
-default['mongodb']['server_lock'] = "/var/lock/mongodb"
-default['mongodb']['server_logs'] = "/var/log/mongodb"
-default['mongodb']['server_data'] = "/var/lib/mongodb"
-default['mongodb']['server_user'] = "mongodb"
-default['mongodb']['server_group'] = "mongodb"
-
+case node['platform']                                                                         
+when "debian", "ubuntu"
+  default['mongodb']['path_data'] = "/var/lib/mongodb"
+  default['mongodb']['path_log'] = "/var/log/mongodb/mongodb.log"
+when "centos","redhat"
+  default['mongodb']['path_data'] = "/var/lib/mongo"
+  default['mongodb']['path_log'] = "/var/log/mongo/mongod.log"
+end
+default['mongodb']['interface'] = "0.0.0.0"
+default['mongodb']['port'] = 27017
+default['mongodb']['nojournal'] = false
+default['mongodb']['logging_verbose'] = false
+default['mongodb']['logging_cpu'] = false
+default['mongodb']['oplogging'] = 0
+default['mongodb']['nohttp'] = false
