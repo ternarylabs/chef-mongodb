@@ -27,7 +27,7 @@ when "centos","redhat"
   default['mongodb']['path_data'] = "/var/lib/mongo"
   default['mongodb']['path_log'] = "/var/log/mongo/mongod.log"
 end
-default['mongodb']['interface'] = "0.0.0.0"
+default['mongodb']['interface'] = "127.0.0.1"
 default['mongodb']['port'] = 27017
 default['mongodb']['nojournal'] = false
 default['mongodb']['logging_verbose'] = false

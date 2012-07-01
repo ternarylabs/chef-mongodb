@@ -55,7 +55,7 @@ Just include the mongodb cookbock in your runlist or server role with the follow
 This will install the java dependencie, the mongodb server and the declared plugins.
 
 # Attributes #
-* `node['mongodb']['interface']` - "127.0.0.1" limit to local access, default is "0.0.0.0".
+* `node['mongodb']['interface']` - "0.0.0.0" make access network wide, default is "127.0.0.1".
 * `node['mongodb']['port']` = database listener port, default is "27017".
 * `node['mongodb']['nojournal']` = to disable journaling, default is "false".
 * `node['mongodb']['logging_verbose']` = enable verbose logging, default is "false".
