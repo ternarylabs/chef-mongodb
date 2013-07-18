@@ -21,7 +21,7 @@ logappend=true
 fork = true
 <% end -%>
 
-bind_ip = "<%= node['mongodb']['interface'] %>"
+bind_ip = <%= node['mongodb']['interface'] %>
 
 port = <%= node['mongodb']['port'] %>
 
